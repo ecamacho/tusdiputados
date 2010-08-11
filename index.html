@@ -114,28 +114,65 @@
 				<div class="half">
 					<h2>Diputados con m&aacute;s iniciativas</h2>  
 					<ul class="toplist">
+						
+						{% for diputado in topDiputados %}
 						<li>
 							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez</p> 
+								<div style="width:200px;
+								height:131px;
+								background-image:url('{{diputado.foto}}');
+								background-position:right;
+								float: left;
+								margin: 0 0 10px 10px;"></div>	
+								<p>{{diputado.nombre}}</p> 
+								<p><span class="numero">{{diputado.numero_iniciativas}} iniciativas</span></p>
+								{% ifequal diputado.partido "PRI"%}
 								<p>
 									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'
 									height='48' width='48'/>
-								</p>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PAN"%}
+								<p>
+									<img src='http://2.bp.blogspot.com/_De-_NgluLkw/SjzgPlTFe0I/AAAAAAAAAKE/pcSQL_GpmLA/s1600/logoPAN.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PRD"%}
+								<p>
+									<img src='http://i.esmas.com/image/0/000/002/069/NOMX1219_logoPRD_P.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PT"%}
+								<p>
+									<img src='http://4.bp.blogspot.com/_edFDdOSr7aw/SYqV_ExXE5I/AAAAAAAAAH0/OM50I0LxsNs/S259/PT_logo.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "Convergencia"%}
+								<p>
+									<img src='http://www.legisver.gob.mx/imagenes/logo_convergencia.jpg'
+									height='52' width='74'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "Partido Verde"%}
+								<p>
+									<img src='http://3.bp.blogspot.com/_OyfX8Dpv_oU/S0gX2YtfOEI/AAAAAAAAH3c/a7eqVdMFCd4/S226/Logo.gif'
+									height='52' width='74'/>
+								</p>			
+								{% endifequal %}
+
+								{% ifequal diputado.partido "Alianza"%}
+								<p>
+									<img src='http://genero.ife.org.mx/images/partidos/logo_nueva-alianza_ch.gif'/>
+								</p>			
+								{% endifequal %}
+
+								
 							</div>
 						</li>
-						<li>
-							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez </p>
-							</div>								
-						</li>
-						<li>
-							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez </p>
-							</div>								
-						</li>
+						{% endfor %}
 					</ul>	
 					
 
@@ -145,26 +182,64 @@
 				</div>
 				<!-- iniciativas presentadas-->
 				<div class="half last">
-					<h2>Diputados con menos iniciativas</h2>  
+					<h2>Diputados con menos iniciativas</h2>  					
 			  		<ul class="toplist">
+					{% for diputado in downDiputados %}
 						<li>
 							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez</p> 
+									<div style="width:200px;
+									height:131px;
+									background-image:url('{{diputado.foto}}');
+									background-position:right;
+									float: left;
+									margin: 0 0 10px 10px;"></div>
+								<p>{{diputado.nombre}}</p>
+								<p>{{diputado.numero_iniciativas}} iniciativa(s)</p>
+								{% ifequal diputado.partido "PRI"%}
+								<p>
+									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PAN"%}
+								<p>
+									<img src='http://2.bp.blogspot.com/_De-_NgluLkw/SjzgPlTFe0I/AAAAAAAAAKE/pcSQL_GpmLA/s1600/logoPAN.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PRD"%}
+								<p>
+									<img src='http://i.esmas.com/image/0/000/002/069/NOMX1219_logoPRD_P.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "PT"%}
+								<p>
+									<img src='http://4.bp.blogspot.com/_edFDdOSr7aw/SYqV_ExXE5I/AAAAAAAAAH0/OM50I0LxsNs/S259/PT_logo.jpg'
+									height='48' width='48'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "Convergencia"%}
+								<p>
+									<img src='http://www.legisver.gob.mx/imagenes/logo_convergencia.jpg'
+									height='52' width='74'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "Partido Verde"%}
+								<p>
+									<img src='http://3.bp.blogspot.com/_OyfX8Dpv_oU/S0gX2YtfOEI/AAAAAAAAH3c/a7eqVdMFCd4/S226/Logo.gif'
+									height='52' width='74'/>
+								</p>			
+								{% endifequal %}
+
+								{% ifequal diputado.partido "Alianza"%}
+								<p>
+									<img src='http://genero.ife.org.mx/images/partidos/logo_nueva-alianza_ch.gif'/>
+								</p>			
+								{% endifequal %}
 							</div>
 						</li>
-						<li>
-							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez </p>
-							</div>	
-						</li>
-						<li>
-							<div class="diplist">
-								<div class="div_imagediputado"></div>	
-								<p>Juan P&eacute;rez P&eacute;rez </p>
-							</div>								
-						</li>
+					{% endfor %}
 					</ul>
 				</div>		
 			
@@ -268,6 +343,19 @@ A $10 DONATION AT WWW.DOTEMPLATE.COM IF YOU WANT TO REMOVE IT
           <a href="http://www.dotemplate.com" shape="rect">doTemplate</a> 
         </div> 
       </div> 
-    </div> 
+    </div>
+ 	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-12863649-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
   </body>
 </html>

@@ -60,7 +60,7 @@ body {
 }
 
 .toplist li {
-	height:130px;
+	height:180px;
 	margin: 0 0 10px 10px;
 }
 
@@ -68,6 +68,9 @@ body {
 	background-color: #f7f7f7;
 }
 
+.numero {
+	color:#FF0000;
+}
 
 #wrapper {
 	margin:0 auto ;

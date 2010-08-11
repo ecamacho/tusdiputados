@@ -1,24 +1,28 @@
 from google.appengine.tools import bulkloader
 from google.appengine.ext import db
 import datetime
+
 class Diputado(db.Model):
     
-    uuid                  = db.StringProperty()
-    asistencias_url       = db.StringProperty()
-    biopic_url            = db.StringProperty()
-    curul                 = db.StringProperty()
-    distrito              = db.StringProperty()
-    email                 = db.StringProperty(multiline=True)
-    entidad               = db.StringProperty()
-    foto                  = db.StringProperty()
-    iniciativas_url       = db.StringProperty()
-    nombre                = db.StringProperty()
-    partido               = db.StringProperty()
-    proposiciones_url     = db.StringProperty()
-    tipo_mayoria          = db.StringProperty()
-    votaciones_url        = db.StringProperty()
-  #  fecha_nacimiento      = db.StringProperty()
-    fecha_nacimiento	= db.DateProperty()
+    uuid                  			= db.StringProperty()
+    asistencias_url       			= db.StringProperty()
+    biopic_url            			= db.StringProperty()
+    curul                 			= db.StringProperty()
+    distrito              			= db.StringProperty()
+    email                 			= db.StringProperty(multiline=True)
+    entidad               			= db.StringProperty()
+    foto                  			= db.StringProperty()
+    iniciativas_url       			= db.StringProperty()
+    nombre                			= db.StringProperty()
+    partido               			= db.StringProperty()
+    proposiciones_url     			= db.StringProperty()
+    tipo_mayoria          			= db.StringProperty()
+    votaciones_url        			= db.StringProperty()
+    fecha_nacimiento				= db.DateProperty()
+    numero_iniciativas				= db.IntegerProperty()
+    numero_iniciativas_aprobadas	= db.IntegerProperty()
+    numero_iniciativas_pendientes	= db.IntegerProperty()
+    numero_iniciativas_desechadas	= db.IntegerProperty()
 
 class Iniciativa(db.Model):
 
@@ -36,14 +40,23 @@ class Iniciativa(db.Model):
 class ComisionIniciativa(db.Model):
 
 	id			= db.IntegerProperty()
-	comision	= db.StringProperty()
+	comision	= db.StringProperty(multiline=True)
 	tipo		= db.IntegerProperty()
 	iniciativa	= db.StringProperty()
 
+	
+class Partido(db.Model):
+
+	nombre							= db.StringProperty()
+	numero_diputados				= db.IntegerProperty()
+	numero_iniciativas				= db.IntegerProperty()
+	numero_iniciativas_aprobadas	= db.IntegerProperty()
+	numero_iniciativas_pendientes	= db.IntegerProperty()
+	numero_iniciativas_desechadas	= db.IntegerProperty()
+
 
 class DiputadosLoader(bulkloader.Loader):
-      
-
+   
     def __init__(self):
 		bulkloader.Loader.__init__(self, 'Diputado',[
 			                                          ('uuid',lambda s:unicode(s, 'utf-8') or None),
@@ -57,6 +70,10 @@ class DiputadosLoader(bulkloader.Loader):
 			                                          ('foto',lambda s:unicode(s, 'utf-8') or None),                                                                                                        
 			                                          ('iniciativas_url',lambda s:unicode(s, 'utf-8') or None),
 			                                          ('nombre',lambda s:unicode(s, 'utf-8') or None),
+													  ('numero_iniciativas',lambda s:int(s) or None),
+													  ('numero_iniciativas_aprobadas',lambda s:int(s) or None),
+													  ('numero_iniciativas_pendientes',lambda s:int(s) or None),
+													  ('numero_iniciativas_desechadas',lambda s:int(s) or None),
 			                                          ('partido',lambda s:unicode(s, 'utf-8') or None),
 			                                          ('proposiciones_url',lambda s:unicode(s, 'utf-8') or None),
 			                                          ('tipo_mayoria',lambda s:unicode(s, 'utf-8') or None),
@@ -97,11 +114,27 @@ class ComisionIniciativaLoader(bulkloader.Loader):
 		                                              ('id',lambda s:int(s) or None),
 		                                              ('comision',lambda s:unicode(s, 'utf-8') or None),
 													  ('iniciativa',lambda s:unicode(s, 'utf-8') or None),
-		                                              ('tipo',lambda s:int(s) or None),
-
+		                                              ('tipo',lambda s:int(s) or None)
 		                                              ]
 									)
 
+
+	def generate_key(self,i,values):
+		key = "%s" % str(values[0])
+		return key		
+
+class PartidoLoader(bulkloader.Loader):
+
+	def __init__(self):
+		bulkloader.Loader.__init__(self, 'Partido',[
+				                                   	('nombre',lambda s:unicode(s, 'utf-8') or None),
+				                                   	('numero_diputados',lambda s:int(s) or None),			
+				                                   	('numero_iniciativas',lambda s:int(s) or None),
+												   	('numero_iniciativas_aprobadas',lambda s:int(s) or None),
+													('numero_iniciativas_pendientes',lambda s:int(s) or None),
+													('numero_iniciativas_desechadas',lambda s:int(s) or None)
+				                                    ]
+											)
 
 	def generate_key(self,i,values):
 		key = "%s" % str(values[0])
@@ -115,4 +148,4 @@ def parseFecha(s):
 	else:
 		return None
 	
-loaders = [DiputadosLoader, IniciativaLoader, ComisionIniciativaLoader]
+loaders = [DiputadosLoader, IniciativaLoader, ComisionIniciativaLoader, PartidoLoader]
