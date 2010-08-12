@@ -51,6 +51,14 @@ body {
 												text-decoration:none;
 								}
 
+.about {
+	height:200px;
+	background-color:#FFFF99;
+	font-family: 'Crimson Text', arial, serif; 
+	font-size: 17px;
+	margin: 10px 10px 10px 10px;
+}
+
 .div_imagediputado {
 	width:130px;
 	height:131px;

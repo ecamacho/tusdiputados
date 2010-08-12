@@ -122,13 +122,20 @@ class IniciativasHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'iniciativas.html')
 		self.response.out.write(template.render(path, template_values))			
 
+class AboutHandler(webapp.RequestHandler):
+	def get(self):
+		template_values = {}
+		path = os.path.join(os.path.dirname(__file__), 'about.html')
+		self.response.out.write(template.render(path, template_values))
+		
 def main():
 	logging.getLogger().setLevel(logging.DEBUG)
 	application = webapp.WSGIApplication([  ('/', MainHandler),
+											('/about', AboutHandler),
 											('/diputado', DiputadoHandler),
 											('/diputados', DiputadosHandler),
-											('/topiniciativas', TopIniciativasHandler),
-											('/iniciativas', IniciativasHandler)
+											('/iniciativas', IniciativasHandler),
+											('/topiniciativas', TopIniciativasHandler)											
 										],
                                          debug=True)
 	util.run_wsgi_app(application)

@@ -20,17 +20,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" language="javascript" src="js/addon.js"></script>
 	<script type="text/javascript" language="javascript" src="js/custom.js"></script>
-	<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javascript"> 
-	$(document).ready(function(){
-		//hide the all of the element with class msg_body
-		$(".msg_body").hide();
-		//toggle the componenet with class msg_body
-		$(".msg_head").click(function(){
-			$(this).next(".msg_body").slideToggle(250);
-		});
-	});
-	</script> 
+	<script src="http://platform.twitter.com/anywhere.js?id=o9gAhQH5xacVSj8FMz0RQ&amp;v=1">
+	  </script>
 
   </head>
   <body class="favourings firefox western es signin-island" id="profile_favorites"> 
@@ -51,80 +42,22 @@
     <!-- end top wrapper -->  
     <div id="wrapper"> 
      
-	
+		<div class="clear" style="height:40px"></div> 	
         <!--  content -->  
-        <div id="content"> 
+        <div id="content" class="about"> 
          
-        <div class="clear" style="height:40px"></div> 
-		<p class="crimson_medium"> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
-		<br/>
-		<div>
-				<ul>
-
-					<li >
-						<div class="diplist">
-							<div style="width:10px;
-										height:10px;
-										float:left;
-										background-color: #FFE140;				
-										margin: 0 0 10px 10px;"></div> 
-							&nbsp;Iniciativas Pendientes
-						</div>	
-					</li>
-					<li>
-						<div class="diplist">
-							<div style="width:10px;
-										height:10px;
-										float:left;
-										background-color: #A0F06C;				
-										margin: 0 0 10px 10px;"></div> 
-							&nbsp;Iniciativas Pendientes
-						</div>	
-					</li>
-					<li>
-						<div class="diplist">
-							<div style="width:10px;
-										height:10px;
-										float:left;	
-										background-color: #FE3F44;				
-										margin: 0 0 10px 10px;"></div> 
-							&nbsp;Iniciativas Pendientes 							
-						</div>	
-					</li>
-				</ul>
+            <div class="clear" style="height:40px"></div> 
+			TusDiputados es una iniciativa ciudadana de Erick Camacho (<em>@ecamacho</em>) englobada dentro del 
+			movimiento opendata.
+			<div class="clear" style="height:15px"></div> 
+  			El objetivo de este proyecto es hacer p&uacute;blicos los datos de la actividad de los 
+			diputados federales de M&eacute;xico con el fin de que los ciudadanos puedan analizarlos y tener más claro 
+			c&oacute;mo trabajan.
+			<div class="clear" style="height:15px"></div> 
+			Cuando entendamos c&oacute;mo trabajan, en donde aciertan y en donde fallan; podremos colaborar para 
+			encontrar nuevas v&iacute;as para mejorar la actividad legislativa en el pa&iacute;s.
 		</div>	
-            				
-			<div>								
-				{% for iniciativa in iniciativas %}
-					{% ifequal iniciativa.tramite "DESECHADA"%}
-					<ul class="desechada">
-					{% endifequal %}
-					{% ifequal iniciativa.tramite "APROBADA"%}
-					<ul class="aprobada">
-					{% endifequal %}
-					{% ifequal iniciativa.tramite "PENDIENTE"%}
-					<ul class="pendiente">
-					{% endifequal %}	
-						<li>
-						<p class="msg_head">{{iniciativa.titulo}}</p>						
-						<div class="msg_body">
-							<a href='{{iniciativa.link_gaceta}}' target='_blank'>Iniciativa en gaceta parlamentaria</a><br />
-							fecha: {{ iniciativa.fecha|date:"d/m/Y" }}<br/>
-							fecha publicaci&oacute;n: {{ iniciativa.fecha_publicacion|date:"d/m/Y" }}<br/>
-							{% ifequal iniciativa.tramite "APROBADA"%}
-							fecha aprobaci&oacute;n: {{ iniciativa.fecha_aprobacion|date:"d/m/Y" }}<br />
-							{% endifequal %}
-							<br />
-							{{iniciativa.sinopsis}}
-						</div>	
-						</li>
-					</ul>
-					
-				{% endfor %}
-				
-            </div>
-  				
-
+		<div class="clear" style="height:300px"></div> 
 		 
       <!-- end container --> 
     </div>  
@@ -152,8 +85,9 @@ A $10 DONATION AT WWW.DOTEMPLATE.COM IF YOU WANT TO REMOVE IT
 	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
-	  
-		
+	  	twttr.anywhere(function(twitter) {
+	              twitter.hovercards();
+	     });	
 	</script>
-</body>
+  </body>
 </html>
