@@ -29,7 +29,7 @@
     <div id="topnav"> 
       <ul>
         <li id="current" style="border:none">
-          <a href="#" shape="rect">Iniciativas</a>
+          <a href="/" shape="rect">Iniciativas</a>
         </li>
         <li>
           <a href="#" shape="rect">Acerca de</a>
@@ -108,12 +108,63 @@
             <div class="clear" style="height:40px"></div> 
 			<!--Top 10 diputados-->
             <div> 
-              
-			
+              	{% ifequal tipo "presentadas"%}
+					<p class="crimson_medium">
+						Iniciativas presentadas 
+						| <a href='topiniciativas?tipo=numero_iniciativas_pendientes'>Iniciativas pendientes</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_aprobadas'>Iniciativas aprobadas</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_desechadas'>Iniciativas desechadas</a>
+					  </p>
+				{% endifequal %}
+				{% ifequal tipo "numero_iniciativas_aprobadas"%}
+					<p class="crimson_medium">
+						<a href='/'>Iniciativas presentadas</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_pendientes'>Iniciativas pendientes</a> 
+						| Iniciativas aprobadas 
+						| <a href='topiniciativas?tipo=numero_iniciativas_desechadas'>Iniciativas desechadas</a>
+					  </p>
+				{% endifequal %}
+				{% ifequal tipo "numero_iniciativas_pendientes"%}
+					<p class="crimson_medium">
+						<a href='/'>Iniciativas presentadas</a> 
+						| Iniciativas pendientes
+						| <a href='topiniciativas?tipo=numero_iniciativas_aprobadas'>Iniciativas aprobadas</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_desechadas'>Iniciativas desechadas</a>
+					  </p>
+				{% endifequal %}
+				{% ifequal tipo "numero_iniciativas_desechadas"%}
+					<p class="crimson_medium">
+						<a href='/'>Iniciativas presentadas</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_pendientes'>Iniciativas pendientes</a> 
+						| <a href='topiniciativas?tipo=numero_iniciativas_aprobadas'>Iniciativas aprobadas</a> 
+						| Iniciativas desechadas
+					  </p>
+				{% endifequal %}
+			  
+
 			  <!-- iniciativas presentadas-->
 				<div class="half">
-					<h2>Diputados con m&aacute;s iniciativas</h2>  
-					<ul class="toplist">
+					
+					<h2 class="crimson_medium_blue">Top 10 diputados con m&aacute;s iniciativas</h2>
+					<h2 class="crimson_medium_blue">
+						{% ifequal tipo "presentadas"%}
+							<a href='diputados?tipo=numero_iniciativas'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_aprobadas"%}
+							<a href='diputados?tipo=numero_iniciativas_aprobadas'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_pendientes"%}
+							<a href='diputados?tipo=numero_iniciativas_pendientes'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_desechadas"%}
+							<a href='diputados?tipo=numero_iniciativas_desechadas'>
+						{% endifequal %}
+						
+							ver lista completa
+						</a>
+					</h2>  
+					<br />
+					<ol class="toplist">
 						
 						{% for diputado in topDiputados %}
 						<li>
@@ -125,47 +176,61 @@
 								float: left;
 								margin: 0 0 10px 10px;"></div>	
 								<p><a href='diputado?id={{diputado.uuid}}'>{{diputado.nombre}}</a></p> 
-								<p><span class="numero">{{diputado.numero_iniciativas}} iniciativas</span></p>
+								<p><span class="numero">
+									    {% ifequal tipo "presentadas"%}
+											{{diputado.numero_iniciativas}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_aprobadas"%}
+											{{diputado.numero_iniciativas_aprobadas}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_pendientes"%}
+											{{diputado.numero_iniciativas_pendientes}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_desechadas"%}
+											{{diputado.numero_iniciativas_desechadas}} 
+										{% endifequal %}
+										iniciativas
+									</span>
+								</p>
 								{% ifequal diputado.partido "PRI"%}
 								<p>
-									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'
-									height='48' width='48'/>
+									<img src='/images/logo_pri.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PAN"%}
 								<p>
-									<img src='http://2.bp.blogspot.com/_De-_NgluLkw/SjzgPlTFe0I/AAAAAAAAAKE/pcSQL_GpmLA/s1600/logoPAN.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pan.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PRD"%}
 								<p>
-									<img src='http://i.esmas.com/image/0/000/002/069/NOMX1219_logoPRD_P.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_prd.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PT"%}
 								<p>
-									<img src='http://4.bp.blogspot.com/_edFDdOSr7aw/SYqV_ExXE5I/AAAAAAAAAH0/OM50I0LxsNs/S259/PT_logo.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pt.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Convergencia"%}
 								<p>
-									<img src='http://www.legisver.gob.mx/imagenes/logo_convergencia.jpg'
-									height='52' width='74'/>
+									<img src='/images/logo_convergencia.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Partido Verde"%}
 								<p>
-									<img src='http://3.bp.blogspot.com/_OyfX8Dpv_oU/S0gX2YtfOEI/AAAAAAAAH3c/a7eqVdMFCd4/S226/Logo.gif'
-									height='52' width='74'/>
+									<img src='/images/logo_pv.png'/>
 								</p>			
 								{% endifequal %}
 
 								{% ifequal diputado.partido "Alianza"%}
 								<p>
-									<img src='http://genero.ife.org.mx/images/partidos/logo_nueva-alianza_ch.gif'/>
+									<img src='/images/logo_alianza.png'/>
+								</p>			
+								{% endifequal %}
+								{% ifequal diputado.partido "Independiente"%}
+								<p>
+									Independiente
 								</p>			
 								{% endifequal %}
 
@@ -173,17 +238,15 @@
 							</div>
 						</li>
 						{% endfor %}
-					</ul>	
-					
+					</ol>	
 
-			  		
-			  			
-			  		
 				</div>
 				<!-- iniciativas presentadas-->
 				<div class="half last">
-					<h2>Diputados con menos iniciativas</h2>  					
-			  		<ul class="toplist">
+					<h2 class="crimson_medium_blue">Top 10 diputados con menos iniciativas</h2>
+					<h2 class="crimson_medium_blue"><a href='diputados'>ver lista completa</a></h2>  
+					<br /> 					
+			  		<ol class="toplist">
 					{% for diputado in downDiputados %}
 						<li>
 							<div class="diplist">
@@ -194,75 +257,68 @@
 									float: left;
 									margin: 0 0 10px 10px;"></div>
 								<p><a href='diputado?id={{diputado.uuid}}'>{{diputado.nombre}}</a></p> 
-								<p><span class="numero">{{diputado.numero_iniciativas}} iniciativas</span></p>
+								<p><span class="numero">
+									    {% ifequal tipo "presentadas"%}
+											{{diputado.numero_iniciativas}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_aprobadas"%}
+											{{diputado.numero_iniciativas_aprobadas}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_pendientes"%}
+											{{diputado.numero_iniciativas_pendientes}} 
+										{% endifequal %}
+										{% ifequal tipo "numero_iniciativas_desechadas"%}
+											{{diputado.numero_iniciativas_desechadas}} 
+										{% endifequal %}
+										iniciativas
+									</span>
+								</p>
 								{% ifequal diputado.partido "PRI"%}
 								<p>
-									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'
-									height='48' width='48'/>
+									<img src='/images/logo_pri.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PAN"%}
 								<p>
-									<img src='http://2.bp.blogspot.com/_De-_NgluLkw/SjzgPlTFe0I/AAAAAAAAAKE/pcSQL_GpmLA/s1600/logoPAN.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pan.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PRD"%}
 								<p>
-									<img src='http://i.esmas.com/image/0/000/002/069/NOMX1219_logoPRD_P.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_prd.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PT"%}
 								<p>
-									<img src='http://4.bp.blogspot.com/_edFDdOSr7aw/SYqV_ExXE5I/AAAAAAAAAH0/OM50I0LxsNs/S259/PT_logo.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pt.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Convergencia"%}
 								<p>
-									<img src='http://www.legisver.gob.mx/imagenes/logo_convergencia.jpg'
-									height='52' width='74'/>
+									<img src='/images/logo_convergencia.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Partido Verde"%}
 								<p>
-									<img src='http://3.bp.blogspot.com/_OyfX8Dpv_oU/S0gX2YtfOEI/AAAAAAAAH3c/a7eqVdMFCd4/S226/Logo.gif'
-									height='52' width='74'/>
+									<img src='/images/logo_pv.png'/>
 								</p>			
 								{% endifequal %}
 
 								{% ifequal diputado.partido "Alianza"%}
 								<p>
-									<img src='http://genero.ife.org.mx/images/partidos/logo_nueva-alianza_ch.gif'/>
+									<img src='/images/logo_alianza.png'/>
 								</p>			
 								{% endifequal %}
 							</div>
 						</li>
 					{% endfor %}
-					</ul>
+					</ol>
 				</div>		
 			
 			
             </div>  
 
-			<!--Top 10 partidos-->
-            <div> 
-              <h3>Top / Down partidos</h3>  
-              <p>Lorem ipsum dolor sit amet, turpis egestas commodo, eget non ultrices nec lectus, ac interdum, netus aliquam.</p> 
-            </div> 
-
-			<!--Top 10 comisiones-->
-			<div > 
-              <h3>Top / Down comisiones</h3>  
-              <p>Lorem ipsum dolor sit amet, turpis egestas commodo, eget non ultrices nec lectus, ac interdum, netus aliquam, vulputate vel reiciendis risus.</p> 
-            </div>  
-
-			<!-- Agregado camara-->
-            <div > 
-              <h3>Total c&aacute;mara</h3>  
-              <p>Lorem ipsum dolor sit amet, turpis egestas commodo, eget non ultrices nec lectus, ac interdum, netus aliquam.</p> 
-            </div>
+			
           </div>  
           <div class="clear"></div> 
         </div>  
@@ -273,66 +329,7 @@
     </div>  
     <div id="bottomWrapper"> 
       <div id="footer"> 
-        <div class="footer-one-third"> 
-          <h2>Company</h2>  
-          <ul>
-            <li>
-              <a href="#" shape="rect">Who are we</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">What we do</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Contact</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Partners</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Links</a>
-            </li>
-          </ul> 
-        </div>  
-        <div class="footer-one-third"> 
-          <h2>Products</h2>  
-          <ul>
-            <li>
-              <a href="#" shape="rect">Products</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Services</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Clients</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Testimonials</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Links</a>
-            </li>
-          </ul> 
-        </div>  
-        <div class="footer-one-third footer-last"> 
-          <h2>Blog archives</h2>  
-          <ul>
-            <li>
-              <a href="#" shape="rect">Lorem ipsum</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Dolor sit</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Turpis egestas</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Commodo</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">Eget non</a>
-            </li>
-          </ul> 
-        </div> 
+        
       </div>  
       <div id="bottom-links"> 
         <div style="padding-top:20px"> 

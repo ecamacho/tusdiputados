@@ -57,7 +57,6 @@ class Partido(db.Expando):
 
 
 class DiputadosLoader(bulkloader.Loader):
-   
     def __init__(self):
 		bulkloader.Loader.__init__(self, 'Diputado',[
 			                                          ('uuid',lambda s:unicode(s, 'utf-8') or None),
@@ -73,8 +72,8 @@ class DiputadosLoader(bulkloader.Loader):
 			                                          ('nombre',lambda s:unicode(s, 'utf-8') or None),
 													  ('numero_iniciativas',lambda s:int(s) or None),
 													  ('numero_iniciativas_aprobadas',lambda s:int(s) or None),
-													  ('numero_iniciativas_pendientes',lambda s:int(s) or None),
 													  ('numero_iniciativas_desechadas',lambda s:int(s) or None),
+													  ('numero_iniciativas_pendientes',lambda s:int(s) or None),													  
 			                                          ('partido',lambda s:unicode(s, 'utf-8') or None),
 			                                          ('proposiciones_url',lambda s:unicode(s, 'utf-8') or None),
 			                                          ('tipo_mayoria',lambda s:unicode(s, 'utf-8') or None),

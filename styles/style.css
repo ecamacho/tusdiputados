@@ -40,6 +40,16 @@ body {
 .crimson_medium { font-family: 'Crimson Text', arial, serif; 
 				   font-size: 20px;
 				}
+.crimson_medium_blue { font-family: 'Crimson Text', arial, serif; 
+								   font-size: 17px;
+								color:#280671;
+				}				
+
+.crimson_medium_blue a { font-family: 'Crimson Text', arial, serif; 
+												   font-size: 16px;
+												color:#280671;
+												text-decoration:none;
+								}
 
 .div_imagediputado {
 	width:130px;
@@ -54,13 +64,16 @@ body {
 	clear:left;
 }
 
-.diplist p {
-	font-size: 16px;
-	margin:10px auto ;
+
+
+.subtitle {
+	
 }
 
 .toplist li {
-	height:180px;
+	list-style-type: decimal;
+	  display: list-item;
+	height:160px;
 	margin: 0 0 10px 10px;
 }
 

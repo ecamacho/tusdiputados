@@ -44,7 +44,7 @@
         <div id="content"> 
          
             <div class="clear" style="height:40px"></div> 
-			<p> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
+			<p class="crimson_medium"> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
 
             <div class="half"> 
               <img src='{{diputado.foto}}'></img>	
@@ -61,44 +61,38 @@
    																	
 								{% ifequal diputado.partido "PRI"%}
 								<p>Partido: 
-									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'
-									height='48' width='48'/>
+									<img src='/images/logo_pri.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PAN"%}
 								<p>Partido: 
-									<img src='http://2.bp.blogspot.com/_De-_NgluLkw/SjzgPlTFe0I/AAAAAAAAAKE/pcSQL_GpmLA/s1600/logoPAN.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pan.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PRD"%}
 								<p>Partido: 
-									<img src='http://i.esmas.com/image/0/000/002/069/NOMX1219_logoPRD_P.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_prd.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "PT"%}
 								<p>Partido: 
-									<img src='http://4.bp.blogspot.com/_edFDdOSr7aw/SYqV_ExXE5I/AAAAAAAAAH0/OM50I0LxsNs/S259/PT_logo.jpg'
-									height='48' width='48'/>
+									<img src='/images/logo_pt.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Convergencia"%}
 								<p>Partido: 
-									<img src='http://www.legisver.gob.mx/imagenes/logo_convergencia.jpg'
-									height='52' width='74'/>
+									<img src='/images/logo_convergencia.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Partido Verde"%}
 								<p>Partido: 
-									<img src='http://3.bp.blogspot.com/_OyfX8Dpv_oU/S0gX2YtfOEI/AAAAAAAAH3c/a7eqVdMFCd4/S226/Logo.gif'
-									height='52' width='74'/>
+									<img src='/images/logo_pv.png'/>
 								</p>			
 								{% endifequal %}
 
 								{% ifequal diputado.partido "Alianza"%}
 								<p>Partido: 
-									<img src='http://genero.ife.org.mx/images/partidos/logo_nueva-alianza_ch.gif'/>
+									<img src='/images/logo_alianza.png'/>
 								</p>			
 								{% endifequal %}
 								{% ifequal diputado.partido "Independiente"%}
@@ -107,11 +101,12 @@
 								</p>			
 								{% endifequal %}
 								<!--iniciativas-->
+								<p>Iniciativas - <a href='/iniciativas?id={{diputado.uuid}}'>ver todas</a></p>
 								<div>
-									<p>Iniciativa(s): {{diputado.numero_iniciativas}}   <a href='/iniciativas?id={{diputado.uuid}}'>ver todas</a></p>
-									<p>Iniciativa(s) pendiente(s): {{diputado.numero_iniciativas_pendientes}}</p>
-									<p>Iniciativa(s) aprobada(s):  {{diputado.numero_iniciativas_aprobadas}}</p>
-									<p>Iniciativa(s) desechada(s): {{diputado.numero_iniciativas_desechadas}}</p>
+									<p>Iniciativa(s) presentada(s): {{diputado.numero_iniciativas}}   </p>
+									<p>Iniciativa(s) pendiente(s):  {{diputado.numero_iniciativas_pendientes}}</p>
+									<p>Iniciativa(s) aprobada(s):   {{diputado.numero_iniciativas_aprobadas}}</p>
+									<p>Iniciativa(s) desechada(s):  {{diputado.numero_iniciativas_desechadas}}</p>
 								</div>
 																				
             </div>

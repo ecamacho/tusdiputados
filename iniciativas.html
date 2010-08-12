@@ -55,11 +55,45 @@
         <!--  content -->  
         <div id="content"> 
          
-            <div class="clear" style="height:40px"></div> 
-			<p> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
+        <div class="clear" style="height:40px"></div> 
+		<p class="crimson_medium"> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
+		<br/>
+		<div>
+				<ul>
 
-            
-
+					<li >
+						<div class="diplist">
+							<div style="width:10px;
+										height:10px;
+										float:left;
+										background-color: #FFE140;				
+										margin: 0 0 10px 10px;"></div> 
+							&nbsp;Iniciativas Pendientes
+						</div>	
+					</li>
+					<li>
+						<div class="diplist">
+							<div style="width:10px;
+										height:10px;
+										float:left;
+										background-color: #A0F06C;				
+										margin: 0 0 10px 10px;"></div> 
+							&nbsp;Iniciativas Pendientes
+						</div>	
+					</li>
+					<li>
+						<div class="diplist">
+							<div style="width:10px;
+										height:10px;
+										float:left;	
+										background-color: #FE3F44;				
+										margin: 0 0 10px 10px;"></div> 
+							&nbsp;Iniciativas Pendientes 							
+						</div>	
+					</li>
+				</ul>
+		</div>	
+            				
 			<div>								
 				{% for iniciativa in iniciativas %}
 					{% ifequal iniciativa.tramite "DESECHADA"%}

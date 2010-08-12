@@ -26,16 +26,43 @@ from google.appengine.ext.webapp import template
 class MainHandler(webapp.RequestHandler):
     def get(self):
 		helper = PersistenceHelper()
-		topDiputados  = helper.getTopDiputadosIniciativas( 10 )
-		downDiputados = helper.getDownDiputadosIniciativas( 10 )
-		logging.info("funciona")
+		topDiputados  = helper.getTopDiputadosIniciativas(  10, "numero_iniciativas" )
+		downDiputados = helper.getDownDiputadosIniciativas( 10, "numero_iniciativas" )
 		for d in downDiputados:
 			if d.numero_iniciativas == None:
 				d.numero_iniciativas = 0
-		template_values = { "topDiputados" :topDiputados, 
-							"downDiputados":downDiputados }
+		template_values = { "topDiputados"  :topDiputados, 
+							"downDiputados" :downDiputados,
+							"tipo"			:"presentadas" }
 		path = os.path.join(os.path.dirname(__file__), 'index.html')
 		self.response.out.write(template.render(path, template_values))
+		
+class TopIniciativasHandler(webapp.RequestHandler):
+	def get(self):
+		tipo  = self.request.get("tipo")
+		helper = PersistenceHelper()
+		topDiputados  = helper.getTopDiputadosIniciativas(  10, tipo )
+		downDiputados = helper.getDownDiputadosIniciativas( 10, tipo )
+		for d in downDiputados:
+			if d.numero_iniciativas_pendientes == None:
+				d.numero_iniciativas_pendientes = 0
+			if d.numero_iniciativas_aprobadas == None:
+				d.numero_iniciativas_aprobadas = 0
+			if d.numero_iniciativas_desechadas == None:
+				d.numero_iniciativas_desechadas = 0			
+		for d in topDiputados:
+			if d.numero_iniciativas_pendientes == None:
+				d.numero_iniciativas_pendientes = 0
+			if d.numero_iniciativas_aprobadas == None:
+				d.numero_iniciativas_aprobadas = 0
+			if d.numero_iniciativas_desechadas == None:
+				d.numero_iniciativas_desechadas = 0			
+					
+		template_values = { "topDiputados"  :topDiputados, 
+							"downDiputados" :downDiputados,
+							"tipo"			:tipo }
+		path = os.path.join(os.path.dirname(__file__), 'index.html')
+		self.response.out.write(template.render(path, template_values))		
 		
 class DiputadoHandler(webapp.RequestHandler):
 	def get(self):
@@ -55,6 +82,35 @@ class DiputadoHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'diputado.html')
 		self.response.out.write(template.render(path, template_values))	
 		
+class DiputadosHandler(webapp.RequestHandler):
+	def get(self):
+		tipo  = self.request.get("tipo")
+		helper = PersistenceHelper()
+		topDiputados  = helper.getTopDiputadosIniciativas(  500, tipo )
+		downDiputados = helper.getDownDiputadosIniciativas( 500, tipo )
+
+		
+		for d in downDiputados:
+			if d.numero_iniciativas_pendientes == None:
+				d.numero_iniciativas_pendientes = 0
+			if d.numero_iniciativas_aprobadas == None:
+				d.numero_iniciativas_aprobadas = 0
+			if d.numero_iniciativas_desechadas == None:
+				d.numero_iniciativas_desechadas = 0			
+		for d in topDiputados:
+			if d.numero_iniciativas_pendientes == None:
+				d.numero_iniciativas_pendientes = 0
+			if d.numero_iniciativas_aprobadas == None:
+				d.numero_iniciativas_aprobadas = 0
+			if d.numero_iniciativas_desechadas == None:
+				d.numero_iniciativas_desechadas = 0
+		
+		template_values = { "topDiputados"  :topDiputados, 
+							"downDiputados" :downDiputados,
+							"tipo"			:tipo }
+		path = os.path.join(os.path.dirname(__file__), 'diputados.html')
+		self.response.out.write(template.render(path, template_values))	
+		
 class IniciativasHandler(webapp.RequestHandler):
 	def get(self):
 		helper 	= PersistenceHelper()
@@ -70,6 +126,8 @@ def main():
 	logging.getLogger().setLevel(logging.DEBUG)
 	application = webapp.WSGIApplication([  ('/', MainHandler),
 											('/diputado', DiputadoHandler),
+											('/diputados', DiputadosHandler),
+											('/topiniciativas', TopIniciativasHandler),
 											('/iniciativas', IniciativasHandler)
 										],
                                          debug=True)
