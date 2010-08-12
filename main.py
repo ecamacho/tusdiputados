@@ -37,10 +37,41 @@ class MainHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'index.html')
 		self.response.out.write(template.render(path, template_values))
 		
+class DiputadoHandler(webapp.RequestHandler):
+	def get(self):
+		helper 	= PersistenceHelper()
+		uuid    = self.request.get("id")
+		d      	= helper.findDiputadoById(uuid)
+		if d.numero_iniciativas == None:
+			d.numero_iniciativas = 0
+		if d.numero_iniciativas_pendientes == None:
+			d.numero_iniciativas_pendientes = 0
+		if d.numero_iniciativas_aprobadas == None:
+			d.numero_iniciativas_aprobadas = 0	
+		if d.numero_iniciativas_desechadas == None:
+			d.numero_iniciativas_desechadas = 0	
+					
+		template_values = { "diputado" :d}
+		path = os.path.join(os.path.dirname(__file__), 'diputado.html')
+		self.response.out.write(template.render(path, template_values))	
+		
+class IniciativasHandler(webapp.RequestHandler):
+	def get(self):
+		helper 	= PersistenceHelper()
+		uuid	= self.request.get("id")
+		d      	= helper.findDiputadoById(uuid)
+		r		= helper.findIniciativasByDiputado(uuid)
+		template_values = { "diputado" : d,
+							"iniciativas" :r }
+		path = os.path.join(os.path.dirname(__file__), 'iniciativas.html')
+		self.response.out.write(template.render(path, template_values))			
 
 def main():
 	logging.getLogger().setLevel(logging.DEBUG)
-	application = webapp.WSGIApplication([('/', MainHandler)],
+	application = webapp.WSGIApplication([  ('/', MainHandler),
+											('/diputado', DiputadoHandler),
+											('/iniciativas', IniciativasHandler)
+										],
                                          debug=True)
 	util.run_wsgi_app(application)
 

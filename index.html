@@ -124,7 +124,7 @@
 								background-position:right;
 								float: left;
 								margin: 0 0 10px 10px;"></div>	
-								<p>{{diputado.nombre}}</p> 
+								<p><a href='diputado?id={{diputado.uuid}}'>{{diputado.nombre}}</a></p> 
 								<p><span class="numero">{{diputado.numero_iniciativas}} iniciativas</span></p>
 								{% ifequal diputado.partido "PRI"%}
 								<p>
@@ -193,8 +193,8 @@
 									background-position:right;
 									float: left;
 									margin: 0 0 10px 10px;"></div>
-								<p>{{diputado.nombre}}</p>
-								<p>{{diputado.numero_iniciativas}} iniciativa(s)</p>
+								<p><a href='diputado?id={{diputado.uuid}}'>{{diputado.nombre}}</a></p> 
+								<p><span class="numero">{{diputado.numero_iniciativas}} iniciativas</span></p>
 								{% ifequal diputado.partido "PRI"%}
 								<p>
 									<img src='http://4.bp.blogspot.com/_yuQA-jTA-vE/SgrlLXs2WjI/AAAAAAAAAAU/_tLyQDLj0Mg/S220/PRI_Logo.gif'

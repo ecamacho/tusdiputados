@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+  <head>
+    <title>El trabajo de tus diputados</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="El trabajo de tus diputados" />
+    <meta name="description" content="Agregador de estadisticas sobre el trabajo de los diputados federales en Mexico" />
+    <meta name="keywords" content="diputados estadisticas opendata congreso mexico camara" />
+    <meta name="language" content="es" />
+    <meta name="subject" content="estadisticas" />
+    <meta name="robots" content="All" />
+    <meta name="copyright" content="TidySlice" />
+    <meta name="abstract" content="Agregador de estadisticas sobre el trabajo de los diputados federales en Mexico" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+	<link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
+	<link id="theme" rel="stylesheet" type="text/css" href="styles/style.css" title="theme" />
+	<link rel="stylesheet" href="styles/reset-fonts-grids.css" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" language="javascript" src="js/addon.js"></script>
+	<script type="text/javascript" language="javascript" src="js/custom.js"></script>
+	<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript"> 
+	$(document).ready(function(){
+		//hide the all of the element with class msg_body
+		$(".msg_body").hide();
+		//toggle the componenet with class msg_body
+		$(".msg_head").click(function(){
+			$(this).next(".msg_body").slideToggle(250);
+		});
+	});
+	</script> 
+
+  </head>
+  <body class="favourings firefox western es signin-island" id="profile_favorites"> 
+    <!-- top wrapper -->  
+    <div id="topWrapper"> 
+      <div id="topBanner"></div> 
+    </div>  
+    <div id="topnav"> 
+      <ul>
+        <li id="current" style="border:none">
+          <a href="/" shape="rect">Iniciativas</a>
+        </li>
+        <li>
+          <a href="#" shape="rect">Acerca de</a>
+        </li>
+      </ul> 
+    </div>  
+    <!-- end top wrapper -->  
+    <div id="wrapper"> 
+     
+	
+        <!--  content -->  
+        <div id="content"> 
+         
+            <div class="clear" style="height:40px"></div> 
+			<p> <a href='{{diputado.biopic_url}}'>{{diputado.nombre}}</a></p>
+
+            
+
+			<div>								
+				{% for iniciativa in iniciativas %}
+					{% ifequal iniciativa.tramite "DESECHADA"%}
+					<ul class="desechada">
+					{% endifequal %}
+					{% ifequal iniciativa.tramite "APROBADA"%}
+					<ul class="aprobada">
+					{% endifequal %}
+					{% ifequal iniciativa.tramite "PENDIENTE"%}
+					<ul class="pendiente">
+					{% endifequal %}	
+						<li>
+						<p class="msg_head">{{iniciativa.titulo}}</p>						
+						<div class="msg_body">
+							<a href='{{iniciativa.link_gaceta}}' target='_blank'>Iniciativa en gaceta parlamentaria</a><br />
+							fecha: {{ iniciativa.fecha|date:"d/m/Y" }}<br/>
+							fecha publicaci&oacute;n: {{ iniciativa.fecha_publicacion|date:"d/m/Y" }}<br/>
+							{% ifequal iniciativa.tramite "APROBADA"%}
+							fecha aprobaci&oacute;n: {{ iniciativa.fecha_aprobacion|date:"d/m/Y" }}<br />
+							{% endifequal %}
+							<br />
+							{{iniciativa.sinopsis}}
+						</div>	
+						</li>
+					</ul>
+					
+				{% endfor %}
+				
+            </div>
+  				
+
+		 
+      <!-- end container --> 
+    </div>  
+    <div id="bottomWrapper"> 
+      <div id="footer"> 
+        
+      <div id="bottom-links"> 
+        <div style="padding-top:20px"> 
+          <!--
+KEEP THE FOLLOWING CODE IN RESPECT WITH COPYRIGHT OR MAKE 
+A $10 DONATION AT WWW.DOTEMPLATE.COM IF YOU WANT TO REMOVE IT 
+--> Web template created with 
+          <a href="http://www.dotemplate.com" shape="rect">doTemplate</a> 
+        </div> 
+      </div> 
+    </div>
+ 	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-12863649-5']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	  
+		
+	</script>
+</body>
+</html>

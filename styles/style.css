@@ -71,6 +71,40 @@ body {
 .numero {
 	color:#FF0000;
 }
+.msg_body {
+	padding: 5px 10px 15px;
+	background-color:#F4F4F8;
+}
+.pendiente li{
+	background-color: #FFE140;
+	border-top: 1px solid #ffffff;
+	padding:10px 0px ;
+}
+
+.pendiente li:hover {
+	border-top: 1px solid #ffffff;
+	background-color:#FFF473;
+}
+
+.aprobada li{
+	background-color:#A0F06C;
+	border-top: 1px solid #ffffff;
+}
+
+.aprobada li:hover {
+	background-color: #C6F66F;
+	border-top: 1px solid #ffffff;
+}
+
+.desechada li{
+	background-color:#FE7276;
+	border-top: 1px solid #ffffff;
+}
+
+.desechada li:hover {
+	background-color: #FE3F44;
+	border-top: 1px solid #ffffff;
+}
 
 #wrapper {
 	margin:0 auto ;

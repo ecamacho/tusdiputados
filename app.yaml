@@ -1,5 +1,5 @@
 application: tusdiputados
-version: 1
+version: 2
 runtime: python
 api_version: 1
 
@@ -7,7 +7,7 @@ handlers:
 
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
-  #login: admin
+  login: admin
   
 - url: /images
   static_dir: images
