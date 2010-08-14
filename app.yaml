@@ -17,7 +17,12 @@ handlers:
 
 - url: /styles
   static_dir: styles
-  
+
+- url: /deletecache  
+  script: main.py
+  login: admin
+  secure: always
+      
 - url: .*
   script: main.py
 

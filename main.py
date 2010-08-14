@@ -23,6 +23,7 @@ from google.appengine.ext.webapp import util
 from google.appengine.ext.webapp import template
 
 
+
 class MainHandler(webapp.RequestHandler):
     def get(self):
 		helper = PersistenceHelper()
@@ -113,7 +114,7 @@ class DiputadosHandler(webapp.RequestHandler):
 		
 class IniciativasHandler(webapp.RequestHandler):
 	def get(self):
-		helper 	= PersistenceHelper()
+		
 		uuid	= self.request.get("id")
 		d      	= helper.findDiputadoById(uuid)
 		r		= helper.findIniciativasByDiputado(uuid)
@@ -128,6 +129,11 @@ class AboutHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'about.html')
 		self.response.out.write(template.render(path, template_values))
 		
+class DeleteCacheHandler(webapp.RequestHandler):
+	def get(self):
+		helper 	= PersistenceHelper()
+		helper.deleteAllInCache()
+		
 def main():
 	logging.getLogger().setLevel(logging.DEBUG)
 	application = webapp.WSGIApplication([  ('/', MainHandler),
@@ -135,6 +141,7 @@ def main():
 											('/diputado', DiputadoHandler),
 											('/diputados', DiputadosHandler),
 											('/iniciativas', IniciativasHandler),
+											('/deletecache', DeleteCacheHandler),
 											('/topiniciativas', TopIniciativasHandler)											
 										],
                                          debug=True)
