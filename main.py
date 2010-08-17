@@ -114,7 +114,7 @@ class DiputadosHandler(webapp.RequestHandler):
 		
 class IniciativasHandler(webapp.RequestHandler):
 	def get(self):
-		
+		helper 	= PersistenceHelper()
 		uuid	= self.request.get("id")
 		d      	= helper.findDiputadoById(uuid)
 		r		= helper.findIniciativasByDiputado(uuid)

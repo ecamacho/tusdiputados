@@ -33,7 +33,7 @@ class PersistenceHelper:
 		return results	
 	
 	def findDiputadoById( self, uuid ):
-		key = "dip_%s" %s (uuid)		
+		key = "dip_%s" % (uuid)		
 		e   = memcache.get( key )
 		if e is None:
 			q = Diputado.gql("WHERE uuid = :1",uuid )
