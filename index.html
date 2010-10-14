@@ -244,7 +244,23 @@
 				<!-- iniciativas presentadas-->
 				<div class="half last">
 					<h2 class="crimson_medium_blue">Top 10 diputados con menos iniciativas</h2>
-					<h2 class="crimson_medium_blue"><a href='diputados'>ver lista completa</a></h2>  
+					<h2 class="crimson_medium_blue">
+						{% ifequal tipo "presentadas"%}
+							<a href='diputados?tipo=numero_iniciativas'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_aprobadas"%}
+							<a href='diputados?tipo=numero_iniciativas_aprobadas'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_pendientes"%}
+							<a href='diputados?tipo=numero_iniciativas_pendientes'>
+						{% endifequal %}
+						{% ifequal tipo "numero_iniciativas_desechadas"%}
+							<a href='diputados?tipo=numero_iniciativas_desechadas'>
+						{% endifequal %}
+						
+							ver lista completa
+						</a>
+					</h2>  
 					<br /> 					
 			  		<ol class="toplist">
 					{% for diputado in downDiputados %}
@@ -344,7 +360,7 @@ A $10 DONATION AT WWW.DOTEMPLATE.COM IF YOU WANT TO REMOVE IT
  	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-12863649-5']);
+	  _gaq.push(['_setAccount', 'UA-12863649-6']);
 	  _gaq.push(['_trackPageview']);
 
 	  (function() {

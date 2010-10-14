@@ -11,7 +11,9 @@ class PersistenceHelper:
 		results = memcache.get( key )
 		if results is None:
 			q = Diputado.all()	
+			
 			q.order("-%s" % tipo)
+			
 			results = q.fetch(limit)
 			if not memcache.add( key, results ):
 				logging.error("Memcache set failed.")
